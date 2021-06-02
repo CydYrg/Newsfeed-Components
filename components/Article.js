@@ -110,13 +110,14 @@ function articleMaker({data}) {
   const expandButton = document.createElement('button')
 }
 
-/*   CHECK THIS!!!!!!!
+/*   CHECK THIS!!!!!!! WHICH ONE IS TRUE???
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 */
 expandButton.addEventListener('click', (event) => {
-  expandContent.classList.toggle('toggle-on')
-})
+  expandButton.classList.toggle('toggle-on')
+}) 
+expandButton.classList.add("expand-button","toggle-on");
 /* CHECK THIS!!!!!!!
   Step 3: Don't forget to return something from your function!
 */
@@ -136,3 +137,46 @@ articleData.forEach(articleDataObj => {
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+  function articleMaker(data) {
+    const articleContainer = document.createElement('div')
+    const articleDate = document.createElement('h2')
+    const articleParagraphOne = document.createElement('p')
+    const articleParagraphTwo = document.createElement('p')
+    const articleParagraphThree = document.createElement('p')
+    const articleSpan = document. createElement('span')
+
+  }
+
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.appendChild(articleParagraphOne);
+  articleContainer.appendChild(articleParagraphTwo);
+  articleContainer.appendChild(articleParagraphThree);
+  articleContainer.appendChild(articleSpan);
+
+  articleContainer.classList.add('article');
+  articleContainer.classList.add('date');
+  articleSpan.classList.add('expandButton');
+
+
+  articleTitle.textContent = data.title;
+  articleDate.textContent = data.date;
+  articleParagraphOne = data.firstParagraph;
+  articleParagraphTwo = data.secondParagraph;
+  articleParagraphThree = data.thirdParagraph;
+  articleSpan.textContent = '+';
+
+  articleSpan.addEventListener('click', (event) => {
+    articleContainer.classList.toggle('article-open');
+  });
+
+
+  return articleContainer;
+
+const test = articleMaker({title:'test', date:'2/6/2021', paragraph1:'test1' , paragraph2:'test2' , paragraph3:'test3'});
+console.log(test);
+
+data.forEach((dataObj) => {
+  const dataItem = articleMaker(dataObj);
+  articleMaker.appendChild(dataItem);
+});
