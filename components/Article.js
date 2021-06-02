@@ -1,7 +1,7 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+const articleData = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -102,15 +102,81 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
+function articleMaker({data}) {
+  const article = document.createElement ('div')
+  const articleTitle = document.createElement('h2')
+  const date = document.createElement('p')
+  const expandButton = document.createElement('button')
 
+
+/*   CHECK THIS!!!!!!! WHICH ONE IS TRUE???
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
-
+*/
+expandButton.addEventListener('click', (event) => {
+  expandButton.classList.toggle('toggle-on')
+}) 
+expandButton.classList.add("expand-button","toggle-on");
+/* CHECK THIS!!!!!!!
   Step 3: Don't forget to return something from your function!
-
+*/
+return article
+}
+  /* CHECK THIS!!!!!!
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+*/
+articleData.forEach(articleDataObj => {
+  const article = articleMaker(articleDataObj)
+  document.querySelector('.articles').appendChild(article)
+})
 
+
+/*
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+  function articleMaker2(data) {
+    const articleContainer = document.createElement('div')
+    const articleDate = document.createElement('h2')
+    const articleParagraphOne = document.createElement('p')
+    const articleParagraphTwo = document.createElement('p')
+    const articleParagraphThree = document.createElement('p')
+    const articleSpan = document. createElement('span')
+
+  
+
+  //articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.appendChild(articleParagraphOne);
+  articleContainer.appendChild(articleParagraphTwo);
+  articleContainer.appendChild(articleParagraphThree);
+  articleContainer.appendChild(articleSpan);
+
+  articleContainer.classList.add('article');
+  articleContainer.classList.add('date');
+  articleSpan.classList.add('expandButton');
+
+
+  //articleTitle.textContent = data.title;
+  articleDate.textContent = data.date;
+  articleParagraphOne.textContent = data.firstParagraph;
+  articleParagraphTwo.textContent = data.secondParagraph;
+  articleParagraphThree.textContent = data.thirdParagraph;
+  articleSpan.textContent = '+';
+
+  articleSpan.addEventListener('click', (event) => {
+    articleContainer.classList.toggle('article-open');
+  });
+
+
+  return articleContainer;
+  }
+const test = articleMaker({title:'test', date:'2/6/2021', paragraph1:'test1' , paragraph2:'test2' , paragraph3:'test3'});
+console.log(test);
+
+articleData.forEach((dataObj) => {
+  const dataItem = articleMaker2(dataObj);
+  document.querySelector('.articles').appendChild(dataItem);
+});
